@@ -1,0 +1,29 @@
+{
+  "name": "microfrontends-approach_lib-app",
+  "version": "1.0.0",
+  "description": "Директория в которой содержатся общие зависимости react & react-dom",
+  "main": "index.js",
+  "scripts": {
+    "build": "rspack build --config rspack.config.js ",
+    "legacy:build": "webpack --config webpack.config.js --stats=minimal",
+    "serve": "serve dist -p 3000",
+    "start": "concurrently \"npm run build\" \"npm run serve\""
+  },
+  "keywords": [],
+  "author": "newfaceof@yandex.ru",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@module-federation/enhanced": "^0.3.1",
+    "@rspack/cli": "^0.7.5",
+    "@rspack/core": "^0.7.5",
+    "@rspack/dev-server": "^0.7.5",
+    "concurrently": "^8.2.2",
+    "serve": "^14.2.3",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
