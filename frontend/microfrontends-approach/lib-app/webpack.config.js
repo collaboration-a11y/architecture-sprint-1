@@ -15,9 +15,9 @@ module.exports = {
       name: 'lib_app',
       filename: 'remoteEntry.js',
       exposes: {
+        './styleLoader': './styleLoader',
         './react': 'react',
         './react-dom': 'react-dom',
-        './react-dom/client': 'react-dom/client'
       },
     }),
   ],

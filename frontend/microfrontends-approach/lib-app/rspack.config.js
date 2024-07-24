@@ -47,6 +47,7 @@ const {
         name: 'lib_app',
         filename: 'remoteEntry.js',
         exposes: {
+          './styleLoader': './styleLoader',
           './react': 'react',
           './react-dom': 'react-dom',
         },

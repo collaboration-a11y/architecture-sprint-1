@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   devtool: 'hidden-source-map',
   output: {
-    publicPath: 'http://localhost:3002/',
+    publicPath: 'http://localhost:3003/',
     clean: true,
   },
   resolve: {
@@ -15,6 +15,19 @@ module.exports = {
   cache: false,
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            // TODO: Можно улучшить в будущем добавив изоляцию стилей
+            // options: {
+            //   insert: require.resolve('./styleLoader.js'),
+            // },
+          },
+          'css-loader',
+        ],
+      },
       {
         test: /\.(jpg|png|gif|jpeg)$/,
         loader: 'url-loader',
@@ -34,11 +47,7 @@ module.exports = {
       name: 'main_app',
       remotes: {
         'lib-app': 'lib_app@http://localhost:3000/remoteEntry.js',
-        'footer': 'footer@http://localhost:3003/remoteEntry.js'
       },
-    }),
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
     }),
   ],
 };

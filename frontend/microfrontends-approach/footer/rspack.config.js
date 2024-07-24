@@ -1,35 +1,38 @@
 const {
   container: { ModuleFederationPlugin },
   HtmlRspackPlugin,
-} = require('@rspack/core');
-const path = require('path');
+} = require("@rspack/core");
+const path = require("path");
 module.exports = {
-  entry: './index.js',
-  mode: 'development',
-  devtool: 'hidden-source-map',
+  experiments: {
+    css: true,
+  },
+  entry: "./index.js",
+  mode: "development",
+  devtool: "hidden-source-map",
   output: {
-    publicPath: 'http://localhost:3002/',
+    publicPath: "http://localhost:3003/",
     clean: true,
   },
   module: {
     rules: [
       {
         test: /\.(jpg|png|gif|jpeg)$/,
-        type: 'asset/resource',
+        type: "asset/resource",
       },
       {
         test: /\.(js|jsx)$/,
         use: {
-          loader: 'builtin:swc-loader',
+          loader: "builtin:swc-loader",
           options: {
             jsc: {
               parser: {
-                syntax: 'ecmascript',
+                syntax: "ecmascript",
                 jsx: true,
               },
               transform: {
                 react: {
-                  runtime: 'automatic',
+                  runtime: "automatic",
                 },
               },
             },
@@ -40,14 +43,14 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'main_app',
-      remotes: {
-        'lib-app': 'lib_app@http://localhost:3000/remoteEntry.js',
-        'footer': 'footer@http://localhost:3003/remoteEntry.js'
+      name: "footer",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./Footer": "./src/components/Footer/index.jsx",
       },
-    }),
-    new HtmlRspackPlugin({
-      template: './public/index.html',
+      remotes: {
+        "lib-app": "lib_app@http://localhost:3000/remoteEntry.js",
+      },
     }),
   ],
 };
