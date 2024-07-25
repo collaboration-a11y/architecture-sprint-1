@@ -20,6 +20,7 @@
     "@rspack/cli": "^0.7.5",
     "@rspack/core": "^0.7.5",
     "@rspack/dev-server": "^0.7.5",
+    "@svgr/webpack": "^8.1.0",
     "concurrently": "^8.2.2",
     "serve": "^14.2.3",
     "webpack": "^5.93.0",

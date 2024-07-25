@@ -1,4 +1,5 @@
 import UserProfile from "profile/Profile";
+import Places from 'places/Places';
 
 import "../../styles/content/content.css";
 
@@ -15,6 +16,8 @@ const Main = ({ children }) => {
         onEditProfile={() => undefined}
         onAddPlace={() => undefined}
       />
+      <Places />
+
     </main>
   );
 };

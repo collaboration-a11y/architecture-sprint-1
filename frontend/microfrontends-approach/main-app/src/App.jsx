@@ -8,36 +8,42 @@ import Footer from "footer/Footer";
 
 import Register from "auth/Register";
 import Login from "auth/Login";
+import { useApplication } from "main-app/store";
 
 import Header from "header/Header";
 
 import PopupWithForm from "lib-app/PopupWithForm";
+import InfoTooltip from "lib-app/InfoTooltip";
 
 import Main from "./components/Main/index.jsx";
 
 import * as auth from "./lib/api/auth";
 
 import "./styles/page/page.css";
-import { useApplication } from "main-app/store";
 
 const App = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
+  const [tooltipStatus, setTooltipStatus] = React.useState("");
+
   const { setCurrentUser, api } = useApplication();
 
   function onRegister({ email, password }) {
     auth
       .register(email, password)
       .then((res) => {
-        // setTooltipStatus("success");
-        // setIsInfoToolTipOpen(true);
-        // history.push("/signin");
+        console.log('asdsa')
+        setTooltipStatus("success");
+        setIsInfoToolTipOpen(true);
+        navigate('/signin')
       })
       .catch((err) => {
-        // setTooltipStatus("fail");
-        // setIsInfoToolTipOpen(true);
+        setTooltipStatus("fail");
+        setIsInfoToolTipOpen(true);
       });
   }
 
@@ -50,8 +56,8 @@ const App = () => {
         navigate("/");
       })
       .catch((err) => {
-        // setTooltipStatus("fail");
-        // setIsInfoToolTipOpen(true);
+        setTooltipStatus("fail");
+        setIsInfoToolTipOpen(true);
       });
   }
 
@@ -108,6 +114,13 @@ const App = () => {
       </Routes>
       <Footer />
       <PopupWithForm title="Вы уверены?" name="remove-card" buttonText="Да" />
+      <InfoTooltip
+        isOpen={isInfoToolTipOpen}
+        onClose={() => {
+          setIsInfoToolTipOpen(false);
+        }}
+        status={tooltipStatus}
+      />
     </div>
   );
 };

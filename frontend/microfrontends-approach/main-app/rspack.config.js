@@ -66,6 +66,7 @@ module.exports = {
         './store': './src/store/index.jsx'
       },
       remotes: {
+        "places": "places@http://localhost:3007/remoteEntry.js",
         "main-app": "main_app@http://localhost:3002/remoteEntry.js",
         'profile': 'profile@http://localhost:3006/remoteEntry.js',
         'auth': 'auth@http://localhost:3004/remoteEntry.js',
