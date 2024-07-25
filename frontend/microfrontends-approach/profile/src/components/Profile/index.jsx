@@ -1,12 +1,12 @@
-import '../../styles/profile/profile.css';
+import React from "react";
 
-const Profile = ({
-    imageStyle,
-    onEditAvatar,
-    currentUser,
-    onEditProfile,
-    onAddPlace,
-}) => {
+import "../../styles/profile/profile.css";
+import { useApplication } from "main-app/store";
+
+const Profile = ({ onEditAvatar, onEditProfile, onAddPlace }) => {
+  const { currentUser } = useApplication();
+  const imageStyle = { backgroundImage: `url(${currentUser.avatar})` };
+
   return (
     <section className="profile page__section">
       <div

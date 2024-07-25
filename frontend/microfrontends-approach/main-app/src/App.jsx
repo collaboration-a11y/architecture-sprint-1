@@ -11,19 +11,21 @@ import Login from "auth/Login";
 
 import Header from "header/Header";
 
-import PopupWithForm from 'lib-app/PopupWithForm'
+import PopupWithForm from "lib-app/PopupWithForm";
 
 import Main from "./components/Main/index.jsx";
 
 import * as auth from "./lib/api/auth";
 
 import "./styles/page/page.css";
+import { useApplication } from "main-app/store";
 
 const App = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { setCurrentUser, api } = useApplication();
 
   function onRegister({ email, password }) {
     auth
@@ -45,7 +47,7 @@ const App = () => {
       .then((res) => {
         setIsLoggedIn(true);
         setEmail(email);
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         // setTooltipStatus("fail");
@@ -61,6 +63,35 @@ const App = () => {
     navigate("/signin");
   }
 
+  // Запрос к API за информацией о пользователе и массиве карточек выполняется единожды, при монтировании.
+  React.useEffect(() => {
+    api
+      .getUserInfo()
+      .then((userData) => {
+        setCurrentUser(userData);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // при монтировании App описан эффект, проверяющий наличие токена и его валидности
+  React.useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then((res) => {
+          setEmail(res.data.email);
+          setIsLoggedIn(true);
+          navigate("/");
+        })
+        .catch((err) => {
+          localStorage.removeItem("jwt");
+          console.log(err);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     // TODO: page__content styles is used more than in one component, find a way to make kind of shared styles or something like this
     <div className="page__content">
@@ -75,7 +106,6 @@ const App = () => {
         <Route path="/signin" element={<Login onLogin={onLogin} />} />
         <Route path="/signup" element={<Register onRegister={onRegister} />} />
       </Routes>
-
       <Footer />
       <PopupWithForm title="Вы уверены?" name="remove-card" buttonText="Да" />
     </div>

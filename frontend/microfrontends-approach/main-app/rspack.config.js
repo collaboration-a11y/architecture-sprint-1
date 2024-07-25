@@ -40,6 +40,10 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       shared: {
+        'react-singleton-context': {
+          singleton: true,
+          eager: true
+        },
         'react-router-dom': {
             singleton: true,
             requiredVersion: deps['react-router-dom']
@@ -58,7 +62,11 @@ module.exports = {
         }
     },
       name: 'main_app',
+      exposes: {
+        './store': './src/store/index.jsx'
+      },
       remotes: {
+        "main-app": "main_app@http://localhost:3002/remoteEntry.js",
         'profile': 'profile@http://localhost:3006/remoteEntry.js',
         'auth': 'auth@http://localhost:3004/remoteEntry.js',
         'lib-app': 'lib_app@http://localhost:3000/remoteEntry.js',

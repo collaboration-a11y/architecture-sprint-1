@@ -68,10 +68,11 @@ module.exports = {
       name: "profile",
       filename: "remoteEntry.js",
       exposes: {
-        "./Profile": "./src/components/Profile/index.jsx",
+        "./Profile": "./src/App.jsx",
       },
       remotes: {
         "lib-app": "lib_app@http://localhost:3000/remoteEntry.js",
+        "main-app": "main_app@http://localhost:3002/remoteEntry.js"
       },
     }),
   ],
