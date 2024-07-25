@@ -11,7 +11,9 @@ import Login from "auth/Login";
 
 import Header from "header/Header";
 
-// import Main from "./components/Main/index.jsx";
+import PopupWithForm from 'lib-app/PopupWithForm'
+
+import Main from "./components/Main/index.jsx";
 
 import * as auth from "./lib/api/auth";
 
@@ -41,9 +43,9 @@ const App = () => {
     auth
       .login(email, password)
       .then((res) => {
-        // setIsLoggedIn(true);
-        // setEmail(email);
-        // history.push("/");
+        setIsLoggedIn(true);
+        setEmail(email);
+        navigate('/')
       })
       .catch((err) => {
         // setTooltipStatus("fail");
@@ -67,13 +69,15 @@ const App = () => {
       {/* <Header /> */}
 
       <Routes>
-        {/* <Route element={<ProtectedRoute loggedIn={isLoggedIn} />}>
+        <Route element={<ProtectedRoute loggedIn={isLoggedIn} />}>
           <Route path="/" element={<Main />} />
-        </Route> */}
+        </Route>
         <Route path="/signin" element={<Login onLogin={onLogin} />} />
         <Route path="/signup" element={<Register onRegister={onRegister} />} />
       </Routes>
+
       <Footer />
+      <PopupWithForm title="Вы уверены?" name="remove-card" buttonText="Да" />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import "../../styles/content/content.css";
 const Main = ({ children }) => {
   //TODO:
   // const imageStyle = { backgroundImage: `url(${currentUser.avatar})` };
-  const imageStyle = "";
+  const imageStyle = {};
   return (
     <main className="content">
       <UserProfile
