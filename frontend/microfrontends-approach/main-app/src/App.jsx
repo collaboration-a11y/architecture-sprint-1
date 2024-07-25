@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import Footer from "footer/Footer";
 
 import Register from "auth/Register";
 import Login from "auth/Login";
+import Header from 'header/Header';
 
-import auth from "../lib/api/auth";
+import * as auth from "../lib/api/auth";
 import { Link } from "react-router-dom";
 
 import './styles/page/page.css';
 
 const App = () => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   function onRegister({ email, password }) {
     auth
       .register(email, password)
@@ -41,9 +47,18 @@ const App = () => {
       });
   }
 
+  function onSignOut() {
+    // при вызове обработчика onSignOut происходит удаление jwt
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    // После успешного вызова обработчика onSignOut происходит редирект на /signin
+    navigate("/signin");
+  }
+
   return (
     // TODO: page__content styles is used more than in one component, find a way to make kind of shared styles or something like this
     <div className="page__content">
+      <Header email={email} onSignOut={onSignOut} />
       {/* TODO: add header component */}
       {/* <Header /> */}
 

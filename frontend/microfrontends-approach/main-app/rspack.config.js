@@ -61,7 +61,8 @@ module.exports = {
       remotes: {
         'auth': 'auth@http://localhost:3004/remoteEntry.js',
         'lib-app': 'lib_app@http://localhost:3000/remoteEntry.js',
-        'footer': 'footer@http://localhost:3003/remoteEntry.js'
+        'footer': 'footer@http://localhost:3003/remoteEntry.js',
+        'header': 'header@http://localhost:3005/remoteEntry.js'
       },
     }),
     new HtmlRspackPlugin({

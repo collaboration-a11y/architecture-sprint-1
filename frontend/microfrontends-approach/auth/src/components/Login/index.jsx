@@ -3,7 +3,7 @@ import React from 'react';
 import '../../styles/auth-form/auth-form.css'
 
 function Login ({ onLogin }){
-  console.log('onLogin', onLogin)
+  
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
