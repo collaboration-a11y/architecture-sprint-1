@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-
 import { Route, Routes, useNavigate } from "react-router-dom";
-
-import ProtectedRoute from "./lib/routes/ProtectedRoute.jsx";
-
-import Footer from "footer/Footer";
-
-import Register from "auth/Register";
-import Login from "auth/Login";
-import { useApplication } from "main-app/store";
-
-import Header from "header/Header";
 
 import PopupWithForm from "lib-app/PopupWithForm";
 import InfoTooltip from "lib-app/InfoTooltip";
+import Header from "header/Header";
+import Login from "auth/Login";
+import Register from "auth/Register";
+import Footer from "footer/Footer";
+
+import { useApplication } from "main-app/store";
 
 import Main from "./components/Main/index.jsx";
+import ProtectedRoute from "./lib/routes/ProtectedRoute.jsx";
 
 import * as auth from "./lib/api/auth";
 
@@ -36,10 +32,10 @@ const App = () => {
     auth
       .register(email, password)
       .then((res) => {
-        console.log('asdsa')
+        console.log("asdsa");
         setTooltipStatus("success");
         setIsInfoToolTipOpen(true);
-        navigate('/signin')
+        navigate("/signin");
       })
       .catch((err) => {
         setTooltipStatus("fail");
@@ -99,11 +95,8 @@ const App = () => {
   }, []);
 
   return (
-    // TODO: page__content styles is used more than in one component, find a way to make kind of shared styles or something like this
     <div className="page__content">
       <Header email={email} onSignOut={onSignOut} />
-      {/* TODO: add header component */}
-      {/* <Header /> */}
 
       <Routes>
         <Route element={<ProtectedRoute loggedIn={isLoggedIn} />}>

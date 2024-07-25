@@ -4,7 +4,7 @@ const {
 } = require('@rspack/core');
 const deps = require('./package.json').dependencies;
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   mode: 'development',
   devtool: 'hidden-source-map',
   output: {

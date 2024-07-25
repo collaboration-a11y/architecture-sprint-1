@@ -18,10 +18,6 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
-            // TODO: Можно улучшить в будущем добавив изоляцию стилей
-            // options: {
-            //   insert: require.resolve('./styleLoader.js'),
-            // },
           },
           'css-loader',
         ],

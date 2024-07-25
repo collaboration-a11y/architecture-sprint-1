@@ -40,7 +40,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // TODO: add shared deps
     new ModuleFederationPlugin({
       shared: {
         "react-router-dom": {

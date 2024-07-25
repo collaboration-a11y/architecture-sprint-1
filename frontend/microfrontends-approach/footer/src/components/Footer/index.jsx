@@ -1,9 +1,9 @@
 import React from 'react';
 
 import '../../styles/footer/footer.css'
+import 'lib-app/page-styles';
 
 function Footer() {
-  // TODO: page__section is not loaded, find a way to reuse from global state
   return (
     <footer className="footer page__section">
       <p className="footer__copyright">

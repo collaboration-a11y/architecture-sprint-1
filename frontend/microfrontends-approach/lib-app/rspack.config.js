@@ -70,7 +70,7 @@ module.exports = {
       name: "lib_app",
       filename: "remoteEntry.js",
       exposes: {
-        "./styleLoader": "./styleLoader",
+        "./page-styles": "./src/styles/page/page.css",
         "./react": "react",
         "./react-dom": "react-dom",
         "./PopupWithForm": "./src/components/PopupWithForm/index.jsx",
