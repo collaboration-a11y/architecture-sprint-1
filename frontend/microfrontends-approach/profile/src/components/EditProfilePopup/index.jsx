@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PopupWithForm from "lib-app/PopupWithForm";
 import { useApplication } from "main-app/store";
 
-import "../../styles/popup/popup.css";
+import 'lib-app/popup-styles'
 
 function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
   const [name, setName] = useState("");

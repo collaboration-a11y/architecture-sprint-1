@@ -6,7 +6,7 @@ module.exports = {
   experiments: {
     css: true,
   },
-  entry: "./index.js",
+  entry: "./src/index.js",
   mode: "development",
   devtool: "hidden-source-map",
   output: {

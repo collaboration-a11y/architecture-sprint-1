@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import PopupWithForm from "lib-app/PopupWithForm";
 
+import 'lib-app/popup-styles'
+
 
 function EditAvatarPopup({ isOpen, onUpdateAvatar, onClose }) {
   const inputRef = useRef();

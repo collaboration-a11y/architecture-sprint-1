@@ -15,7 +15,7 @@ import ProtectedRoute from "./lib/routes/ProtectedRoute.jsx";
 
 import * as auth from "./lib/api/auth";
 
-import "./styles/page/page.css";
+import "lib-app/page-styles";
 
 const App = () => {
   const navigate = useNavigate();

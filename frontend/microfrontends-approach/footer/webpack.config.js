@@ -1,6 +1,6 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced');
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   mode: 'development',
   devtool: 'hidden-source-map',
   output: {
