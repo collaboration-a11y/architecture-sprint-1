@@ -1,10 +1,13 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced');
+
+const deps = require('./package.json').dependencies;
+
 module.exports = {
   entry: './index.js',
   mode: 'development',
   devtool: 'hidden-source-map',
   output: {
-    publicPath: 'http://localhost:3003/',
+    publicPath: 'http://localhost:3004/',
     clean: true,
   },
   resolve: {
@@ -18,10 +21,6 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
-            // TODO: Можно улучшить в будущем добавив изоляцию стилей
-            // options: {
-            //   insert: require.resolve('./styleLoader.js'),
-            // },
           },
           'css-loader',
         ],
@@ -42,10 +41,22 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'main_app',
-      filename: 'remoteEntry.js',
+      name: 'auth',
+      shared: {
+        // 'react-router-dom': {
+        //     singleton: true
+        // },
+        'react': {
+            singleton: deps.react,
+        },
+        'react-dom': {
+            singleton: deps['react-dom']
+        }
+    },
+      filename: "remoteEntry.js",
       exposes: {
-        './Footer': './src/components/Footer/index.jsx'
+        "./Login": "./src/components/Login/index.jsx",
+        "./Register": "./src/components/Register/index.jsx"
       },
       remotes: {
         'lib-app': 'lib_app@http://localhost:3000/remoteEntry.js',

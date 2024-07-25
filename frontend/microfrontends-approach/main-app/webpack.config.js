@@ -1,6 +1,5 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
 module.exports = {
   entry: './index.js',
   mode: 'development',
@@ -30,10 +29,11 @@ module.exports = {
     ],
   },
   plugins: [
+    // TODO: add shared deps
     new ModuleFederationPlugin({
       name: 'main_app',
       remotes: {
-        'lib-app': 'lib_app@http://localhost:3000/remoteEntry.js',
+        'auth': 'auth@http://localhost:3004/remoteEntry.js',
         'footer': 'footer@http://localhost:3003/remoteEntry.js'
       },
     }),
