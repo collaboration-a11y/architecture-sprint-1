@@ -1,7 +1,7 @@
 const { ModuleFederationPlugin } = require('@module-federation/enhanced');
 const path = require('path');
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   mode: 'development',
   devtool: 'hidden-source-map',
   output: {
@@ -15,6 +15,7 @@ module.exports = {
       name: 'lib_app',
       filename: 'remoteEntry.js',
       exposes: {
+        './PopupWithForm': './src/components/PopupWithForm/index.jsx',
         './styleLoader': './styleLoader',
         './react': 'react',
         './react-dom': 'react-dom',

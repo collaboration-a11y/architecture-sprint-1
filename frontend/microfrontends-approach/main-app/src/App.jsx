@@ -2,21 +2,25 @@ import React, { useState } from "react";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 
+import ProtectedRoute from "./lib/routes/ProtectedRoute.jsx";
+
 import Footer from "footer/Footer";
 
 import Register from "auth/Register";
 import Login from "auth/Login";
-import Header from 'header/Header';
 
-import * as auth from "../lib/api/auth";
-import { Link } from "react-router-dom";
+import Header from "header/Header";
 
-import './styles/page/page.css';
+// import Main from "./components/Main/index.jsx";
+
+import * as auth from "./lib/api/auth";
+
+import "./styles/page/page.css";
 
 const App = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function onRegister({ email, password }) {
@@ -62,8 +66,10 @@ const App = () => {
       {/* TODO: add header component */}
       {/* <Header /> */}
 
-      <Link to="/signin" children="Go to login" />
       <Routes>
+        {/* <Route element={<ProtectedRoute loggedIn={isLoggedIn} />}>
+          <Route path="/" element={<Main />} />
+        </Route> */}
         <Route path="/signin" element={<Login onLogin={onLogin} />} />
         <Route path="/signup" element={<Register onRegister={onRegister} />} />
       </Routes>
@@ -71,7 +77,5 @@ const App = () => {
     </div>
   );
 };
-
-const Test = () => <div>test</div>
 
 export default App;

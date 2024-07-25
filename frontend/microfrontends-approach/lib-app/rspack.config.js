@@ -1,10 +1,11 @@
 const {
     container: { ModuleFederationPlugin },
-    HtmlRspackPlugin,
   } = require('@rspack/core');
-  const path = require('path');
+
+  const deps = require('./package.json').dependencies;
+
   module.exports = {
-    entry: './index.js',
+    entry: './src/index.js',
     mode: 'development',
     devtool: 'hidden-source-map',
     output: {
@@ -44,12 +45,31 @@ const {
   
     plugins: [
       new ModuleFederationPlugin({
+        shared: {
+          'react-router-dom': {
+              singleton: true,
+              requiredVersion: deps["react-router-dom"]
+          },
+          'react': {
+            requiredVersion: deps.react,
+            import: 'react', // the "react" package will be used a provided and fallback module
+            shareKey: 'react', // under this name the shared module will be placed in the share scope
+            shareScope: 'default', // share scope with this name will be used
+            singleton: true, // only a single version of the shared module is allowed
+
+          },
+          'react-dom': {
+            requiredVersion: deps['react-dom'],
+            singleton: true, // only a single version of the shared module is allowed
+          }
+      },
         name: 'lib_app',
         filename: 'remoteEntry.js',
         exposes: {
           './styleLoader': './styleLoader',
           './react': 'react',
           './react-dom': 'react-dom',
+          './PopupWithForm': './src/components/PopupWithForm/index.jsx'
         },
       }),
     ],

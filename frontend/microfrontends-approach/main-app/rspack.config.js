@@ -59,6 +59,7 @@ module.exports = {
     },
       name: 'main_app',
       remotes: {
+        // 'profile': 'profile@http://localhost:3006/remoteEntry.js',
         'auth': 'auth@http://localhost:3004/remoteEntry.js',
         'lib-app': 'lib_app@http://localhost:3000/remoteEntry.js',
         'footer': 'footer@http://localhost:3003/remoteEntry.js',
