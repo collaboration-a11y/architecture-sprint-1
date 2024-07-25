@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "rspack build --config rspack.config.js",
-    "legacy:build": "webpack --config webpack.config.js --stats=minimal",
     "serve": "serve dist -s -p 3002",
     "start": "concurrently \"npm run build\" \"npm run serve\""
   },
