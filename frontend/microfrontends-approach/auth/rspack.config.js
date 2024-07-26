@@ -70,9 +70,11 @@ const {
         filename: "remoteEntry.js",
         exposes: {
           "./Login": "./src/components/Login/index.jsx",
-          "./Register": "./src/components/Register/index.jsx"
+          "./Register": "./src/components/Register/index.jsx",
+          "./authApi": "./src/lib/api/index.js"
         },
         remotes: {
+        "main-app": "main_app@http://localhost:3002/remoteEntry.js",
           "lib-app": "lib_app@http://localhost:3000/remoteEntry.js",
         },
       }),

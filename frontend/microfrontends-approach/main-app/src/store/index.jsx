@@ -9,8 +9,11 @@ export const ApplicationContext = createContext({
 });
 
 export function ApplicationProvider({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [applicationTooltip, setApplicationTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([]);
 
   return (
     <ApplicationContext.Provider
@@ -19,7 +22,13 @@ export function ApplicationProvider({ children }) {
         setCurrentUser,
         api,
         cards,
-        setCards
+        setCards,
+        isLoggedIn,
+        setIsLoggedIn,
+        email,
+        setEmail,
+        applicationTooltip,
+        setApplicationTooltip,
       }}
     >
       {children}

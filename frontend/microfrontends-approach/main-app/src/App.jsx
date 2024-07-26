@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 import PopupWithForm from "lib-app/PopupWithForm";
@@ -6,6 +6,7 @@ import InfoTooltip from "lib-app/InfoTooltip";
 import Header from "header/Header";
 import Login from "auth/Login";
 import Register from "auth/Register";
+import * as auth from 'auth/authApi'; 
 import Footer from "footer/Footer";
 
 import { useApplication } from "main-app/store";
@@ -13,57 +14,20 @@ import { useApplication } from "main-app/store";
 import Main from "./components/Main/index.jsx";
 import ProtectedRoute from "./lib/routes/ProtectedRoute.jsx";
 
-import * as auth from "./lib/api/auth";
-
 import "lib-app/page-styles";
 
 const App = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
-  const [tooltipStatus, setTooltipStatus] = React.useState("");
-
-  const { setCurrentUser, api } = useApplication();
-
-  function onRegister({ email, password }) {
-    auth
-      .register(email, password)
-      .then((res) => {
-        console.log("asdsa");
-        setTooltipStatus("success");
-        setIsInfoToolTipOpen(true);
-        navigate("/signin");
-      })
-      .catch((err) => {
-        setTooltipStatus("fail");
-        setIsInfoToolTipOpen(true);
-      });
-  }
-
-  function onLogin({ email, password }) {
-    auth
-      .login(email, password)
-      .then((res) => {
-        setIsLoggedIn(true);
-        setEmail(email);
-        navigate("/");
-      })
-      .catch((err) => {
-        setTooltipStatus("fail");
-        setIsInfoToolTipOpen(true);
-      });
-  }
-
-  function onSignOut() {
-    // при вызове обработчика onSignOut происходит удаление jwt
-    localStorage.removeItem("jwt");
-    setIsLoggedIn(false);
-    // После успешного вызова обработчика onSignOut происходит редирект на /signin
-    navigate("/signin");
-  }
+  const {
+    setCurrentUser,
+    api,
+    setEmail,
+    isLoggedIn,
+    setIsLoggedIn,
+    setApplicationTooltip,
+    applicationTooltip,
+  } = useApplication();
 
   // Запрос к API за информацией о пользователе и массиве карточек выполняется единожды, при монтировании.
   React.useEffect(() => {
@@ -96,23 +60,26 @@ const App = () => {
 
   return (
     <div className="page__content">
-      <Header email={email} onSignOut={onSignOut} />
+      <Header />
 
       <Routes>
         <Route element={<ProtectedRoute loggedIn={isLoggedIn} />}>
           <Route path="/" element={<Main />} />
         </Route>
-        <Route path="/signin" element={<Login onLogin={onLogin} />} />
-        <Route path="/signup" element={<Register onRegister={onRegister} />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
       </Routes>
       <Footer />
       <PopupWithForm title="Вы уверены?" name="remove-card" buttonText="Да" />
       <InfoTooltip
-        isOpen={isInfoToolTipOpen}
+        isOpen={applicationTooltip.open}
         onClose={() => {
-          setIsInfoToolTipOpen(false);
+          setApplicationTooltip({
+            status: "null",
+            open: false,
+          });
         }}
-        status={tooltipStatus}
+        status={applicationTooltip.status}
       />
     </div>
   );
