@@ -16,7 +16,8 @@ const contentByStatus = {
 };
 
 function InfoTooltip({ isOpen, onClose, status }) {
-  const { icon: Icon, text } = contentByStatus[status];
+  const { icon: Icon, text } = contentByStatus[status] ?? {};
+  if (!Icon || !text) return null;
   return (
     <div className={`popup ${isOpen && "popup_is-opened"}`}>
       <div className="popup__content">
