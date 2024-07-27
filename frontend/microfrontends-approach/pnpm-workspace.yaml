@@ -1,0 +1,8 @@
+packages:
+  - 'auth'
+  - 'footer'
+  - 'header'
+  - 'lib-app'
+  - 'main-app'
+  - 'places'
+  - 'profile'

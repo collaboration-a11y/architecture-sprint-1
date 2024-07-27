@@ -1,0 +1,13 @@
+{
+  "name": "microfrontends-approach",
+  "private": "true",
+  "description": "Приложение Mesto разделенное на микрофронтенды",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "pnpm --filter microfrontends-approach_* --parallel start",
+    "build": "pnpm --filter microfrontends-approach_* --parallel build"
+  },
+  "keywords": [],
+  "author": "newfaceof@yandex.ru",
+  "license": "ISC"
+}
